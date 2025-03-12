@@ -94,7 +94,7 @@ int main(void) {
 #endif
     // ---------------------- Heap vectors 1 -----------------------
     /* Compute the same result as c but in a heap vector c1 allocated
-     * in the main but computed in an extern function.
+     * in the main but computed in a function out of the main.
      */
 #ifdef RESULTS
     SOLUTION_HEAPVEC_1
@@ -108,7 +108,7 @@ int main(void) {
 #endif
     // ---------------------- Heap vectors 2 -----------------------
     /* Compute the same result as c and c1 in a heap vector c2
-     * also allocated in the extern function
+     * which, this time, is allocated in the function out of the main
      */
 #ifdef RESULTS
     SOLUTION_HEAPVEC_2
@@ -122,7 +122,7 @@ int main(void) {
 #endif
     // ---------------------- Stack vectors 2 ----------------------
     /* Is it possible to compute the c vector as a stack vector of
-     * the extern function and then return it to the main?
+     * the out-main function and then return it to the main?
      */
 #ifdef RESULTS
     SOLUTION_STACKVEC_2
@@ -135,8 +135,9 @@ int main(void) {
 #endif
 
 
-    /* Do now the same 4 previous exercises but with the three
-     * matrices A, B, C of N rows and M columns where:
+    /* Now, do the same 4 previous exercises but with the three
+     * matrices A, B, C. All the matrices has N rows and M columns.
+     * Moreover:
      *   1) A[i][j] = i + j
      *   2) B[i][j] = (i + j) * 100
      *   3) C = A + B
