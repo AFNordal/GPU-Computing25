@@ -9,13 +9,13 @@
 #include "include/my_time_lib.h"
 
 // -------- uncomment these seven lines when solutions are published --------
-//#include "solutions/get_time_test_solutions.c"
-//#define RESULTS
-//#ifdef RESULTS
-//#include "solutions/my_time_lib_solution.c"
-//    MU_SOL
-//    SIGMA_SOL
-//#endif
+#include "solutions/get_time_test_solutions.c"
+#define RESULTS
+#ifdef RESULTS
+#include "solutions/my_time_lib_solution.c"
+    MU_SOL
+    SIGMA_SOL
+#endif
 // ------------------------------------------------------------------------
 
 int main(int argc, char *argv[]) {
