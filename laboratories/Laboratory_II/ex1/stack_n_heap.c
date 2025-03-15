@@ -27,8 +27,8 @@
 }
 
 // -------- uncomment these two lines when solutions are published --------
-// #include "../../solutions/lab1_sol.cu"
-// #define RESULTS
+#include "solutions/stack_n_heap_solutions.c"
+#define RESULTS
 // ------------------------------------------------------------------------
 
 #ifndef SOLUTION_STACKVEC_1
