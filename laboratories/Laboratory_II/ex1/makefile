@@ -14,7 +14,7 @@ debug: all
 
 $(TARGETDIR)/stack_n_heap: ${MAIN}
 	@mkdir -p $(@D)
-	$(CC) $^ -o $@ $(INCLUDE) $(OPT)
+	$(CC) $^ -o $@ $(OPT)
 
 clean:
 	rm -r $(TARGETDIR)/
