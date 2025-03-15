@@ -1,29 +1,27 @@
 #include <stdlib.h>
 #include <stdio.h>
-//#include <time.h>
+#include <time.h>
 #include <math.h>
 
 #define dtype int
+#define NITER 10
 
 #include "include/my_time_lib.h"
-// NOTE: dtype is a macro type defined in 'include/lab1_ex2_lib.h'
-//          also, the functions mu_fn and sigma_fn are defined in 'include/lab1_ex2_lib.h'
-
 
 // -------- uncomment these seven lines when solutions are published --------
-// #include "../../solutions/lab1_sol.cu"
-// #define RESULTS
-// #ifdef RESULTS
-// #include "../../solutions/lab1_ex2_lib_sol.c"
-//     MU_SOL
-//     SIGMA_SOL
-// #endif
+//#include "solutions/get_time_test_solutions.c"
+//#define RESULTS
+//#ifdef RESULTS
+//#include "solutions/my_time_lib_solution.c"
+//    MU_SOL
+//    SIGMA_SOL
+//#endif
 // ------------------------------------------------------------------------
 
 int main(int argc, char *argv[]) {
 
     if (argc < 2) {
-        printf("Usage: lab1_ex2 n\n");
+        printf("Usage: %s n\n", argv[0]);
         return(1);
     }
 
@@ -31,7 +29,7 @@ int main(int argc, char *argv[]) {
 
     int n = atoi(argv[1]), len;
     dtype *a, *b, *c;
-    double *times;
+    double times[NITER];
 
     printf("n = %d\n", n);
     printf("dtype = %s\n", XSTR(dtype));
@@ -70,8 +68,8 @@ int main(int argc, char *argv[]) {
     double mu = 0.0, sigma = 0.0;
 
 #ifdef RESULTS
-    mu = mu_fn_sol(time, len);
-    sigma = sigma_fn_sol(time, mu, len);
+    mu = mu_fn_sol(times, NITER);
+    sigma = sigma_fn_sol(times, mu, NITER);
 #else
         /* |========================================| */
         /* |           Put here your code           | */
