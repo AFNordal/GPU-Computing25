@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#include <string.h>
 
 #define dtype int
 #define NITER 10
@@ -9,20 +10,22 @@
 #include "include/my_time_lib.h"
 
 // -------- uncomment these seven lines when solutions are published --------
-#include "solutions/get_time_test_solutions.c"
-#define RESULTS
-#ifdef RESULTS
-#include "solutions/my_time_lib_solution.c"
-    MU_SOL
-    SIGMA_SOL
-#endif
+// #include "solutions/get_time_test_solutions.c"
+// #define RESULTS
+// #ifdef RESULTS
+// #include "solutions/my_time_lib_solution.c"
+//     MU_SOL
+//     SIGMA_SOL
+// #endif
 // ------------------------------------------------------------------------
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
-    if (argc < 2) {
+    if (argc < 2)
+    {
         printf("Usage: %s n\n", argv[0]);
-        return(1);
+        return (1);
     }
 
     printf("argv[0] = %s\n", argv[1]);
@@ -51,10 +54,48 @@ int main(int argc, char *argv[]) {
 #ifdef RESULTS
     EX2_SOLUTION
 #else
-        /* |========================================| */
-        /* |           Put here your code           | */
-        /* |========================================| */
+    /* |========================================| */
+    /* |           Put here your code           | */
+    /* |========================================| */
+    int isint = (strcmp(XSTR(dtype), "int") == 0);
+    len = 1 << n;
+    printf("len = %d\n", len);
+    time_t t;
+    srand((unsigned) time(&t));
+    a = (dtype*) malloc(sizeof(dtype)*len);
+    b = (dtype*) malloc(sizeof(dtype)*len);
+    c = (dtype*) malloc(sizeof(dtype)*len);
 
+    if (isint)
+    {
+        for (int i = 0; i < len; i++)
+        {
+            a[i] = rand() / (1 << 11);
+            b[i] = rand() / (1 << 11);
+        }
+    } else {
+        for (int i = 0; i < len; i++)
+        {
+            a[i] = (dtype)rand()/((dtype)RAND_MAX);
+            b[i] = (dtype)rand()/((dtype)RAND_MAX);
+        }
+    }
+
+    TIMER_DEF(0);
+    for (int i = -2; i < NITER; i++)
+    {
+        TIMER_START(0);
+        for (int j = 0; j < len; j++)
+        {
+            c[i] = a[i] + b[i];
+        }
+        TIMER_STOP(0);
+        double t = TIMER_ELAPSED(0) / 1.e6;
+        printf("%d: %f\n", i, t);
+        if (i >= 0)
+            times[i] = t;
+    }
+    
 
 
 #endif
@@ -71,14 +112,16 @@ int main(int argc, char *argv[]) {
     mu = mu_fn_sol(times, NITER);
     sigma = sigma_fn_sol(times, mu, NITER);
 #else
-        /* |========================================| */
-        /* |           Put here your code           | */
-        /* |========================================| */
+    /* |========================================| */
+    /* |           Put here your code           | */
+    /* |========================================| */
+    mu = mu_fn(times, len);
+    sigma = sigma_fn(times, mu, len);
 
 #endif
 
     printf(" %10s | %10s | %10s |\n", "v name", "mu(v)", "sigma(v)");
     printf(" %10s | %10f | %10f |\n", "time", mu, sigma);
 
-    return(0);
+    return (0);
 }
