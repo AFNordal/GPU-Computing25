@@ -4,7 +4,7 @@
 #include <math.h>
 #include <string.h>
 
-#define dtype int
+#define dtype double
 #define NITER 10
 
 #include "include/my_time_lib.h"
@@ -62,10 +62,11 @@ int main(int argc, char *argv[])
     printf("len = %d\n", len);
     time_t t;
     srand((unsigned) time(&t));
+    printf("Allocing:\n");
     a = (dtype*) malloc(sizeof(dtype)*len);
     b = (dtype*) malloc(sizeof(dtype)*len);
     c = (dtype*) malloc(sizeof(dtype)*len);
-
+    printf("Initing:\n");
     if (isint)
     {
         for (int i = 0; i < len; i++)
@@ -80,7 +81,7 @@ int main(int argc, char *argv[])
             b[i] = (dtype)rand()/((dtype)RAND_MAX);
         }
     }
-
+    printf("Calculating:\n");
     TIMER_DEF(0);
     for (int i = -2; i < NITER; i++)
     {
@@ -91,7 +92,7 @@ int main(int argc, char *argv[])
         }
         TIMER_STOP(0);
         double t = TIMER_ELAPSED(0) / 1.e6;
-        printf("%d: %f\n", i, t);
+        printf("%d: %lfs\n", i, t);
         if (i >= 0)
             times[i] = t;
     }
@@ -115,8 +116,8 @@ int main(int argc, char *argv[])
     /* |========================================| */
     /* |           Put here your code           | */
     /* |========================================| */
-    mu = mu_fn(times, len);
-    sigma = sigma_fn(times, mu, len);
+    mu = mu_fn(times, NITER);
+    sigma = sigma_fn(times, mu, NITER);
 
 #endif
 
