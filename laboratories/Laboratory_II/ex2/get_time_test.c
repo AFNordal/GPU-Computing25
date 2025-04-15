@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
         TIMER_START(0);
         for (int j = 0; j < len; j++)
         {
-            c[i] = a[i] + b[i];
+            c[j] = a[j] + b[j];
         }
         TIMER_STOP(0);
         double t = TIMER_ELAPSED(0) / 1.e6;

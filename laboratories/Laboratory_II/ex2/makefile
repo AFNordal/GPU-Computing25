@@ -15,13 +15,15 @@ OBJECTS = $(OBJ_FOLDER)/my_time_lib.o
 all: $(BIN_FOLDER)/get_time_test
 
 #create the target 'bin/get_time_test' which needs 'get_time_test.c' and 'my_time_lib.o', generate the folder 'bin' and compile get_time_test.c using CC and OPT
+
 $(OBJ_FOLDER)/my_time_lib.o: $(SRC_FOLDER)/my_time_lib.c
 	@mkdir -p $(BIN_FOLDER) $(OBJ_FOLDER) $(BATCH_OUT_FOLDER)
 	$(CC) -c $(SRC_FOLDER)/my_time_lib.c -o $@ $(OPT)
 
-$(BIN_FOLDER)/get_time_test: ${MAIN} ${OBJECTS}
+
+$(BIN_FOLDER)/get_time_test: $(MAIN) $(OBJECTS)
 	@mkdir -p $(@D)
-	$(CC) $^ -o $@  $(OPT)
+	$(CC) $^ -o $@ $(OPT)
 
 
 clean_batch_outputs:
